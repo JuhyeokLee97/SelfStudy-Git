@@ -1,3 +1,48 @@
+# Git Stash
+**stash** 뜻은 '넣어 두다'이다.
+
+깃 공식 문서에 따르면 **Git Stash**를 다음과 같이 말하고 있다.
+> Stash the changes in a dirty working directory awway
+
+말 그대로 작업물의 수정 내용을 넣어둔다(커밋하지 않고)는 의미인 것 같다.
+
+## 개요
+깃 공식 문서에 따르면 `git stash`에 대해사 다음과 같이 설명하고 있다.
+> Use `git stash` when you want to record the current state of the working directory and the index,
+> but want to go back to a clean working directory. The command saves your local modifications away and reverts the workig directory to match the `HEAD` commit.
+
+여기서는 `git stash`를 어떤 상황에서 왜 써야하는지를 명시하고 있다.
+`git statsh`를 사용할 때는 현재 작업하고 있는 부분을 기록하며 수정 전의 작업물로 돌아갈 때 사용하라고 이야기하고 있다.
+
+## 사용 예시
+### 1. Pulling into a dirty tree
+내가 깃을 통해 협업을 진행한다고 가정해보자.
+예를들어 내가 작업하고 있는 브랜치는 `feature/login`이고 이 브랜치는 `develop`에서 나오게 되었다.
+작업하던 중 다른 팀원의 작업 내용이 `develop`에 합쳐지게 되었고, 작업 내용이 내가 개발중인 로그인 부분에도 영향이 있는 것이다.
+만약 내가 작업한 부분이 `develop`에서 변경된 작업과 충돌될 부분이 없다면 간단하게 `git pull`을 수행하면 된다.
+
+하지만 내가 작업한 부분이 `develop`에서의 변경된 작업과 충돌되는 부분이 있다면 `git pull`을 한다고 해도 **conflict**가 발생하고 쉽게 병합되지 않을 것이다.
+이런 경우에 **stash**를 이용하여 아래와 같이 수행하면 쉽게 해결할 수 있다.
+
+``` powershell
+$ git pull
+ ...
+file foobar not up to date, cannot merge.
+$ git stash -m "my stash message..."
+$ git pull
+$ git stash pop
+```
+
+위의 흐름을 가볍게 살펴보면, 
+- `git pull`하는 과정에서 병합 실패!
+- `git stash`를 통해서 `develop`과 충돌이 발생할 수 있는 부분을 임시 저장. (`-m "..."`: 스태시 메시지는 옵션)
+- `git pull`를 통해 다시 최신 버전의 `develop`과 병합
+- 병합 성공한 후, 임시 저장되어 있는 기존 작업내용 `git stash pop`을 통해 가져오기.
+
+### 2. Interrupted workflow
+이 경우는 내가 회사에서 일하면서 가장 많이 겪은 경우이다.
+
+<!-- 
 ## 개요
 
 Stash는 작업하고 있던 내용을 커밋을 통해 남기지 않고 **임시**로 저장할 때 사용된다.
@@ -19,7 +64,7 @@ Stash는 작업하고 있던 내용을 커밋을 통해 남기지 않고 **임�
     - `Tracked` 상태인 파일을 수정한 경우
 
 
-
+-->
 [참고](https://gmlwjd9405.github.io/2018/05/18/git-stash.html)
 
 [공식문서](https://git-scm.com/docs/git-stash)
