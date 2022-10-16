@@ -33,7 +33,7 @@ $ git pull
 $ git stash pop
 ```
 
-위의 흐름을 가볍게 살펴보면, 
+위의 흐름을 가볍게 살펴보자.
 - `git pull`하는 과정에서 병합 실패!
 - `git stash`를 통해서 `develop`과 충돌이 발생할 수 있는 부분을 임시 저장. (`-m "..."`: 스태시 메시지는 옵션)
 - `git pull`를 통해 다시 최신 버전의 `develop`과 병합
@@ -41,6 +41,27 @@ $ git stash pop
 
 ### 2. Interrupted workflow
 이 경우는 내가 회사에서 일하면서 가장 많이 겪은 경우이다.
+만약 내가 맡은 작업을 진행하던 중, **핫 픽스** 이슈가 들어오거나 **QA 검수 중 이슈** 또는 **앱 심사**와 같은 급히 처리해야할 일들이 발생한다면 작업중인 내용은 우선순위가 밀리게된다. 그냥 커밋 후, 다른 작업을 진행하면 되지만 커밋하기에는 내용이 정리되어 있지 않고 오류를 포함한 코드들이 있을 수 있기에 커밋하기가 꺼려진다.
+
+이런 경우에도 **stash**를 이용하여 아래와 같이 수행하면 커밋하지 않고 처리할 수 있다.
+``` powershell
+$ git stash -m "Stash Login to resolve hotfix"
+$ resolve hotfix...
+$ git commit -m "Fix in a hurry"
+$ git stash pop
+```
+
+위의 흐름을 가볍게 살펴보자
+ - `git stash`를 통해서 기존 작업 내용을 임시저장하고 기존의 클린한 코드로 돌아가서 **핫 픽스**를 대응할 상태를 만든다.
+ - **핫 픽스**를 대응 후, `git commit -m "Fix in a hurry"` 작업 내용을 커밋한다.
+ - 이후에 다시 임시 저장되어 있던 기존 작업내용을 `git stash pop`을 통해 가져온다.
+
+### 3. Testing partial commits
+
+### 4. Saving unrelated changes for future use
+
+### 5. Recovering stash entries that were cleared/droppped erroneously
+
 
 <!-- 
 ## 개요
