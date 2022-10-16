@@ -21,3 +21,5 @@ Stash는 작업하고 있던 내용을 커밋을 통해 남기지 않고 **임�
 
 
 [참고](https://gmlwjd9405.github.io/2018/05/18/git-stash.html)
+
+[공식문서](https://git-scm.com/docs/git-stash)
