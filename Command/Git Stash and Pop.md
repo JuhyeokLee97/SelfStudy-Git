@@ -56,12 +56,6 @@ $ git stash pop
  - **핫 픽스**를 대응 후, `git commit -m "Fix in a hurry"` 작업 내용을 커밋한다.
  - 이후에 다시 임시 저장되어 있던 기존 작업내용을 `git stash pop`을 통해 가져온다.
 
-### 3. Testing partial commits
-
-### 4. Saving unrelated changes for future use
-
-### 5. Recovering stash entries that were cleared/droppped erroneously
-
 
 <!-- 
 ## 개요
